@@ -14,6 +14,8 @@ Project is created due to my learning, because I want to improve my skills. Tech
 
 ## Deployment
 
+Due to free tier of render service, there can be problem with server's response, try to refresh page, or wait for 1-2 min.
+
 https://linkstagram-pi.vercel.app
 
 Client part of website is deployed on Vercel
