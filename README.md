@@ -15,10 +15,12 @@ Project is created due to my learning, because I want to improve my skills. Tech
 ## Deployment
 
 Due to free tier of render service, there can be problem with server's response, try to refresh page, or wait for 1-2 min.
+Free tier does spin down after 15 minutes of inactivity, so the first request after the service is spun down make take a while, but subsequent requests should be faster.
 
 https://linkstagram-pi.vercel.app
 
 Client part of website is deployed on Vercel
+
 Server part of website is deployed on Render
 
 ## Installation
