@@ -75,7 +75,7 @@ class CommentConroller {
           },
         })
         .exec();
-      io.emit('receive-comments', {postId: postId, commentsNumber: post.commentsNumber});
+      io.emit('receive-comments', { postId: postId, commentsNumber: post.commentsNumber });
       io.emit('receive-userComments', post.comments);
 
       res.json(comment);
@@ -150,8 +150,7 @@ class CommentConroller {
           },
         })
         .exec();
-      io.emit('receive-comments', post.commentsNumber);
-
+      io.emit('receive-comments', { postId: postId, commentsNumber: post.commentsNumber });
       io.emit('receive-userComments', post.comments);
 
       res.json({
