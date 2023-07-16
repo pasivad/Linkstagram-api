@@ -1,8 +1,7 @@
-const DatauriParser = require('datauri/parser.js')
+const DatauriParser = require('datauri/parser.js');
 
-const parser = new DatauriParser()
+const parser = new DatauriParser();
 
-const bufferToDataURI = (fileFormat, buffer) =>
-  parser.format(fileFormat, buffer)
+const bufferToDataURI = (fileFormat, buffer) => parser.format(fileFormat, buffer);
 
-module.exports = bufferToDataURI
+module.exports = bufferToDataURI;

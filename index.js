@@ -1,24 +1,36 @@
-require("dotenv").config();
-const express = require ("express")
-const cors = require('cors')
-const mongoose = require ('mongoose')
-const router = require('./routes/index.js')
+require('dotenv').config();
+const express = require('express');
+const cors = require('cors');
+const mongoose = require('mongoose');
+const router = require('./routes/index.js');
+const UserModel = require('./models/User.js');
 
 mongoose
-   .connect(process.env.MONGODB_URI)
-   .then(() => console.log('DB ok'))
-   .catch((err) => console.log('DB error', err))
+  .connect(process.env.MONGODB_URI)
+  .then(() => console.log('DB ok'))
+  .catch((err) => console.log('DB error', err));
 
-const app = express()
+const app = express();
 
-app.use(express.json()) 
-app.use(cors())
-app.use('/api', router)
+app.use(express.json());
+app.use(cors());
+app.use('/api', router);
 
+const server = require('http').createServer(app);
 
-app.listen(4444, (err) => {
-   if (err) {
-      return console.log(err)
-   }
-   console.log("Server OK")
-})
+const io = require('./socket.js').init(server);
+
+io.on('connection', (socket) => {
+  console.log(socket.id);
+  socket.on('receive-userLikes', async (userId) => {
+    const user = await UserModel.findById(userId).exec();
+    io.emit('send-userLikes', { likes: user.likes, likedComments: user.likedComments });
+  });
+});
+
+server.listen(4444, (err) => {
+  if (err) {
+    return console.log(err);
+  }
+  console.log('Server OK');
+});

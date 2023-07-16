@@ -1,5 +1,5 @@
-const multer = require('multer')
-const cloudinary = require('cloudinary')
+const multer = require('multer');
+const cloudinary = require('cloudinary');
 
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
@@ -17,9 +17,7 @@ const uploadToCloudinary = async (fileString, format) => {
   try {
     const { uploader } = cloudinary;
 
-    const res = await uploader.upload(
-      `data:image/${format};base64,${fileString}`
-    );
+    const res = await uploader.upload(`data:image/${format};base64,${fileString}`);
 
     return res;
   } catch (error) {
@@ -28,6 +26,6 @@ const uploadToCloudinary = async (fileString, format) => {
 };
 
 module.exports = {
-   upload,
-   uploadToCloudinary,
+  upload,
+  uploadToCloudinary,
 };
