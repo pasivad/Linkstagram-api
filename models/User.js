@@ -35,6 +35,10 @@ const UserSchema = new mongoose.Schema(
       type: String,
       default: 'Add information about yourself',
     },
+    role: {
+      type: String,
+      default: 'User',
+    },
     likes: [
       {
         type: mongoose.Schema.Types.ObjectId,

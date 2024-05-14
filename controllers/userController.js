@@ -7,7 +7,7 @@ const bufferToDataURI = require('../utils/file.js');
 const { uploadToCloudinary } = require('../service/upload.service.js');
 const io = require('../socket.js');
 const socket = require('../socket.js');
-
+const LoginSessions = require('../models/LoginSessions.js');
 
 class UserController {
   async registration(req, res) {
@@ -79,9 +79,18 @@ class UserController {
       // Response
       const { passwordHash, ...userData } = user._doc;
 
+      // Creating LoginSession
+      const doc = new LoginSessions({
+        user,
+        loginDate: new Date(),
+      });
+
+      const loginSession = await doc.save();
+
       res.json({
         ...userData,
         token,
+        loginSession,
       });
     } catch (err) {
       console.log(err);
@@ -275,7 +284,7 @@ class UserController {
           $inc: { likes: 1 },
         }
       );
-      
+
       res.json({ success: true });
     } catch (err) {
       console.log(err);
@@ -319,12 +328,12 @@ class UserController {
   async getUser(req, res) {
     try {
       const { userId } = req.query;
-      let user
+      let user;
       if (userId) {
         user = await UserModel.findById(userId).exec();
-      } 
+      }
       if (!userId) {
-        user = await UserModel.find().sort({ createdAt: "desc" }).exec();
+        user = await UserModel.find().sort({ createdAt: 'desc' }).exec();
       }
 
       if (!user) {
