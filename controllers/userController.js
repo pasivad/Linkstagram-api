@@ -70,7 +70,7 @@ class UserController {
         {
           _id: user._id,
         },
-        process.env.SECRET_KEY,
+        'secret123',
         {
           expiresIn: '24h',
         }

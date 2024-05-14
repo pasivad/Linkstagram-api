@@ -6,7 +6,7 @@ const router = require('./routes/index.js');
 const UserModel = require('./models/User.js');
 
 mongoose
-  .connect(process.env.MONGODB_URI)
+  .connect('mongodb+srv://MonZero:Vladishack_12@cluster0.qja2dqb.mongodb.net/linkstagram?retryWrites=true&w=majority')
   .then(() => console.log('DB ok'))
   .catch((err) => console.log('DB error', err));
 
