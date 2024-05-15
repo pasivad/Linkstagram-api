@@ -13,6 +13,18 @@ class LoginSessionsController {
       });
     }
   }
+  async actionsTest(req, res) {
+    try {
+      res.json({
+        message: 'actionsTest success',
+      });
+    } catch (err) {
+      console.log(err);
+      res.status(500).json({
+        message: "Can't get loginSessions",
+      });
+    }
+  }
 }
 
 module.exports = new LoginSessionsController();
